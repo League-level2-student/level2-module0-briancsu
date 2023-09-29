@@ -40,21 +40,31 @@ import processing.core.PApplet;
 public class _03_VisualArraySorter extends PApplet {
     static final int WIDTH = 600;
     static final int HEIGHT = 400;
-
+    int[]arr;
     @Override
     public void settings() {
-        
+        size(500,500);
     }
 
     @Override
     public void setup() {
-        
+        arr = new int[50];
+        assign();
+        noStroke();
     }
 
     @Override
     public void draw() {
-        
+        background(0,0,0);
+        for(int i = 0; i < 50; ++i) {
+        	rect(i * (WIDTH/arr.length),arr[i],WIDTH/arr.length,-arr[i]);
+        }
+        stepSort(arr);
+        if(mousePressed) {
+        	assign();
+        }
     }
+    
 
     static public void main(String[] passedArgs) {
         PApplet.main(_03_VisualArraySorter.class.getName());
@@ -63,7 +73,11 @@ public class _03_VisualArraySorter extends PApplet {
     /*********************** DO NOT MODIFY THE CODE BELOW ********************/
     
     int startIndex = 1;
-
+    public void assign() {
+    	for(int i = 0; i < 50; ++i) {
+      	  arr[i] = (int)random(HEIGHT);
+      }
+    }
     void stepSort(int[] arr) {
       for (int i = startIndex; i < arr.length; i++) {
         if (arr[i - 1] > arr[i]) {
